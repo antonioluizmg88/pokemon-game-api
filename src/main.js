@@ -1,14 +1,10 @@
 const express = require('express')
+const config = require('./config')
+const { pokemons } = require('./routes')
+
 const server = express()
-const port = 3000
+const { port } = config.app
 
+server.use(pokemons)
 
-server.get('/', function(req, res) {
-    const user = {
-        name: 'Antonio',
-        spouse: 'Patricia'
-    }
-    res.json(user)
-})
-
-server.listen(port, () => console.log('Server está rolando'))
+server.listen(port, () => console.log(`Server listen on port ${port}`))
