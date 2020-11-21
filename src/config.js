@@ -7,6 +7,9 @@ const config = {
     pokeapi: {
         url: process.env.POKEAPI_URL,
     },
+    db: {
+        name: process.env.DB_NAME,
+    },
 }
 
 module.exports = config
