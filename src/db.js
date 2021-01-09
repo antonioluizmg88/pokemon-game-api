@@ -1,17 +1,18 @@
 const mongoose = require('mongoose')
-const config = require('./config')
 
-const { host, port, name } = config.db
+const connectToMongoDb = async ({ host, port, name }) => {
+  try {
+    await mongoose.connect(`mongodb://${host}:${port}/${name}`, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+    })
+    console.info('Database connection established')
+  } catch (e) {
+    console.error('Failed to connect to database')
+  }
+}
 
-mongoose.connect(
-    `mongodb://${host}:${port}/${name}`, 
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false
-    }
-)
-
-const db = mongoose.connection
-db.on('error', () => console.error('Unable to connect to database'))
-db.once('open', () => console.info(`MongoDB connected on ${host}:${port}`))
+module.exports = {
+  connectToMongoDb,
+}
