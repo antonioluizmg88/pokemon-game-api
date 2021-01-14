@@ -17,10 +17,9 @@ describe('get pokemon', () => {
     fetch.mockReturnValueOnce(new Response(JSON.stringify(charmander)))
 
     return request(app)
-      .get('/players')
+      .get('/pokemon/7')
       .then(({ statusCode, body }) => {
         expect(statusCode).toBe(200)
-        expect(body).toEqual(expect.arrayContaining([player]))
       })
   })
 })
