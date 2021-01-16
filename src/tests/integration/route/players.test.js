@@ -1,13 +1,13 @@
 jest.mock('node-fetch')
-jest.mock('../db', () => ({
+jest.mock('../../../db', () => ({
   connectToMongoDb: jest.fn(),
 }))
 
 const fetch = require('node-fetch')
 const { Response } = jest.requireActual('node-fetch')
-const { Player } = require('../models')
+const { Player } = require('../../../models')
 const request = require('supertest')
-const app = require('../app')
+const app = require('../../../app')
 const charmander = {
   id: 7,
   name: 'Charmander',
@@ -15,7 +15,7 @@ const charmander = {
 let player
 let butterfree
 
-jest.mock('../models')
+jest.mock('../../../models')
 
 describe('player', () => {
   beforeEach(() => {
