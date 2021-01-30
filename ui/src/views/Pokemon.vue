@@ -32,31 +32,28 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 import axios from 'axios'
 
 export default {
   setup() {
     const route = useRoute()
-    let pokemon = ref()
-    let sprites = ref({})
+    const store = useStore()
+    const pokemon = computed(() => {
+      const player = store.getters.getPlayer(route.params.playerId)
 
-    const fetchPlayer = async () => {
-      let player
-
-      try {
-        const { data } = await axios.get(
-          `http://localhost:3000/player/${route.params.playerId}`
-        )
-        player = data
-      } catch (e) {
-        console.error(e)
+      if (!player) {
+        return null
       }
 
       const pokemons = player.pokemons.carrying.concat(player.pokemons.deposit)
-      pokemon.value = pokemons.find(({ _id }) => _id === route.params.pokemonId)
-      sprites.value = Object.entries(pokemon.value.metadata.sprites)
+      return pokemons.find(({ _id }) => _id === route.params.pokemonId)
+    })
+
+    const sprites = computed(() =>
+      Object.entries(pokemon.value.metadata.sprites)
         .filter(([key]) => !['other', 'versions'].includes(key))
         .filter(([key, value]) => value)
         .filter(([key]) => !key.includes('_female'))
@@ -67,10 +64,10 @@ export default {
           }),
           {}
         )
-    }
+    )
 
     onMounted(() => {
-      fetchPlayer()
+      store.dispatch('fetchPlayers')
     })
 
     return {

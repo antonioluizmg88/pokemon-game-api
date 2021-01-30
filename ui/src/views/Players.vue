@@ -1,62 +1,58 @@
 <template>
-  <div v-if="player" class="player-view">
-    <div class="player">
-      <h1>{{ player.name }}</h1>
-      <h3>{{ gender }}</h3>
-    </div>
-
-    <h2>Carrying</h2>
-    <PokemonList :list="player.pokemons.carrying" :player-id="player._id" />
-    <h2>Deposit</h2>
-    <PokemonList :list="player.pokemons.deposit" :player-id="player._id" />
+  <div class="home">
+    <ul class="players">
+      <li
+        v-for="player in players"
+        v-bind:key="player._id"
+        v-text="player.name"
+        @click="
+          router.push({ name: 'player', params: { playerId: player._id } })
+        "
+        class="player"
+      />
+    </ul>
   </div>
 </template>
 
 <script>
-import { computed, ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed, onMounted, ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import axios from 'axios'
-import PokemonList from '@/components/PokemonList.vue'
 
 export default {
-  components: {
-    PokemonList,
-  },
+  name: 'Home',
   setup() {
-    const route = useRoute()
-    let player = ref()
-
-    const fetchPlayer = async () => {
-      try {
-        const { status, data } = await axios.get(
-          `http://localhost:3000/player/${route.params.playerId}`
-        )
-        player.value = status === 200 ? data : player
-      } catch (e) {
-        console.error(e)
-      }
-    }
-
-    onMounted(() => {
-      fetchPlayer()
+    const router = useRouter()
+    const store = useStore()
+    const players = computed(() => {
+      return store.state.players
     })
 
-    const gender = computed(() => {
-      return player.value.gender === 'M' ? 'Male' : 'Female'
+    onMounted(() => {
+      store.dispatch('fetchPlayers')
     })
 
     return {
-      gender,
-      player,
+      players,
+      router,
     }
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.players {
+  list-style: none;
+  display: flex;
+}
+
 .player {
-  h1 {
-    text-transform: capitalize;
-  }
+  font-weight: bold;
+  border: solid 1px gray;
+  padding: 16px;
+  border-radius: 4px;
+  margin: 4px;
+  min-width: 200px;
 }
 </style>

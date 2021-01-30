@@ -3,15 +3,21 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'players',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/Home.vue'),
+      import(/* webpackChunkName: "about" */ '../views/Players.vue'),
   },
   {
     path: '/player/:playerId',
     name: 'player',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/Players.vue'),
+      import(/* webpackChunkName: "about" */ '../views/Player.vue'),
+  },
+  {
+    path: '/player/:playerId/carrying',
+    name: 'carrying',
+    component: () =>
+      import(/* webpackChunkName: "about" */ '../views/Carrying.vue'),
   },
   {
     path: '/player/:playerId/pokemon/:pokemonId',

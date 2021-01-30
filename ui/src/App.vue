@@ -6,11 +6,22 @@
 </template>
 
 <style lang="scss">
+@font-face {
+  font-family: 'Pokemon Fire Red';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Pokemon Fire Red Regular') url('~@/assets/pokemon_fire_red.woff')
+    format('woff');
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: monospace;
+  // font-family: 'Pokemon Fire Red Regular';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  font-size: 16px;
+  background-color: gray;
 }
 
 #nav {
