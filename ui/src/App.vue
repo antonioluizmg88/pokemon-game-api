@@ -1,39 +1,36 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Players</router-link>
+  <div class="container mx-auto max-w-5xl mx-auto p-4">
+    <router-view class="" />
   </div>
-  <router-view />
 </template>
 
-<style lang="scss">
-@font-face {
-  font-family: 'Pokemon Fire Red';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Pokemon Fire Red Regular') url('~@/assets/pokemon_fire_red.woff')
-    format('woff');
-}
+<script>
+import { useRoute, useRouter } from "vue-router"
 
-#app {
-  font-family: monospace;
-  // font-family: 'Pokemon Fire Red Regular';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  font-size: 16px;
-  background-color: gray;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  setup() {
+    const route = useRoute()
+    const router = useRouter()
+    const goBack = () => router.back()
+    console.log(route.name)
+    return { 
+      goBack,
     }
   }
 }
+</script>
+
+<style lang="sass">
+@font-face 
+  font-family: 'Pokemon Fire Red'
+  font-style: normal
+  font-weight: normal
+  src: local('Pokemon Fire Red Regular') url('~@/assets/pokemon_fire_red.woff') format('woff')
+
+#app 
+  font-family: monospace
+  // font-family: 'Pokemon Fire Red Regular'
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  font-size: 16px
 </style>

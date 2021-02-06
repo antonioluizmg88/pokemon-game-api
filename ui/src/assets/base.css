@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.title:before {
+  @apply absolute bg-red-700 rounded-sm shadow;
+  content: '';
+  height: 2px;
+  width: 28px;
+  bottom: 10px;
+}

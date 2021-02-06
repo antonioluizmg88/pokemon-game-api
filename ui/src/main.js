@@ -4,8 +4,14 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import './assets/tailwind.css'
+import './assets/base.css'
+import Button from '@/components/base/Button.vue'
+import Card from '@/components/base/Card.vue'
 
-createApp(App)
-  .use(store)
-  .use(router)
-  .mount('#app')
+const app = createApp(App)
+
+app.use(store).use(router)
+
+app.component('Card', Card).component('Button', Button)
+
+app.mount('#app')
