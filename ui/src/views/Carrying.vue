@@ -1,13 +1,13 @@
 <template>
   <div v-if="player && pokemons.length > 0" class="carrying flex flex-row">
-    <div class="main-pokemon flex-shrink">
+    <div class="flex-shrink">
       <Pokemon
         :pokemon="pokemons[0]"
         :main="true"
         class="min-w-max m-1 mt-14"
       />
     </div>
-    <div class="others flex-grow">
+    <div class="flex-grow">
       <Pokemon
         v-for="pokemon in pokemons.slice(1)"
         v-bind:key="pokemon._id"

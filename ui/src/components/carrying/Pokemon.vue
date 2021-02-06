@@ -21,7 +21,7 @@
     <span
       class="flex flex-col my-4 mx-2 text-white text-right font-bold min-h-full"
     >
-      <StatBar text="HP" :total="hp" :current="hp" />
+      <StatBar text="HP" :total="hp" :current="hp" color="green-400" />
       <span class="text-md">{{ hp }} / {{ hp }}</span>
     </span>
   </div>

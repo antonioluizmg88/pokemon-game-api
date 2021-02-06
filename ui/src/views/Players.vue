@@ -1,16 +1,23 @@
 <template>
-  <div class="home">
-    <ul class="players">
-      <li
-        v-for="player in players"
-        v-bind:key="player._id"
-        v-text="player.name"
-        @click="
-          router.push({ name: 'player', params: { playerId: player._id } })
-        "
-        class="player"
-      />
-    </ul>
+  <div class="players">
+    <Card class="w-full">
+      <template #title>Players</template>
+      <ul class="players__list flex flex-col justify-start p-4 w-full">
+        <li
+          v-for="player in players"
+          v-bind:key="player._id"
+          @click="
+            router.push({ name: 'player', params: { playerId: player._id } })
+          "
+          class="players__item flex m-2 uppercase items-center bg-gray-700 rounded-md px-4 py-2 border-2 border-solid border-gray-500 cursor-pointer"
+        >
+          <span class="flex-grow text-gray-300 text-xl shadow-md text-shadow-1">
+            {{ player.name }}
+          </span>
+          <span>{{ countPokemons(player.pokemons) }} Pokemons</span>
+        </li>
+      </ul>
+    </Card>
   </div>
 </template>
 
@@ -18,7 +25,6 @@
 import { computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import axios from 'axios'
 
 export default {
   name: 'Home',
@@ -29,11 +35,14 @@ export default {
       return store.state.players
     })
 
+    const countPokemons = ({ carrying, deposit }) => carrying.length + deposit.length
+
     onMounted(() => {
       store.dispatch('fetchPlayers')
     })
 
     return {
+      countPokemons,
       players,
       router,
     }
@@ -43,16 +52,8 @@ export default {
 
 <style lang="scss" scoped>
 .players {
-  list-style: none;
-  display: flex;
-}
-
-.player {
-  font-weight: bold;
-  border: solid 1px gray;
-  padding: 16px;
-  border-radius: 4px;
-  margin: 4px;
-  min-width: 200px;
+  &__item:hover {
+    @apply border-gray-200 text-gray-200;
+  }
 }
 </style>
