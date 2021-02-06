@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 html {
-  @apply dark:bg-gray-900 dark:text-gray-300;
+  @apply bg-gray-900 text-gray-300;
 }
