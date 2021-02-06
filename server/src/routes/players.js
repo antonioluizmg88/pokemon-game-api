@@ -44,7 +44,6 @@ router.post('/player', (req, res) => {
     res.end(e.message)
   }
 
-  console.log(player)
   res.json(player)
 })
 

@@ -9,9 +9,10 @@ const PokemonSchema = new Schema({
 const PlayerSchema = new Schema(
   {
     name: String,
+    age: Number,
     gender: {
       type: String,
-      enum: ['F', 'M'],
+      enum: ['M', 'F', 'O', 'X'],
     },
     pokemons: {
       deposit: [PokemonSchema],

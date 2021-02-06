@@ -38,6 +38,7 @@ import { useStore } from 'vuex'
 import axios from 'axios'
 
 export default {
+  name: 'Pokemons',
   setup() {
     const route = useRoute()
     const store = useStore()

@@ -5,29 +5,29 @@
 </template>
 
 <script>
-import { useRoute, useRouter } from "vue-router"
+import { useRoute, useRouter } from 'vue-router'
 
 export default {
+  name: 'App',
   setup() {
     const route = useRoute()
     const router = useRouter()
     const goBack = () => router.back()
-    console.log(route.name)
-    return { 
+    return {
       goBack,
     }
-  }
+  },
 }
 </script>
 
 <style lang="sass">
-@font-face 
+@font-face
   font-family: 'Pokemon Fire Red'
   font-style: normal
   font-weight: normal
   src: local('Pokemon Fire Red Regular') url('~@/assets/pokemon_fire_red.woff') format('woff')
 
-#app 
+#app
   font-family: monospace
   // font-family: 'Pokemon Fire Red Regular'
   -webkit-font-smoothing: antialiased

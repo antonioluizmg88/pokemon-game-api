@@ -25,6 +25,7 @@ import { useStore } from 'vuex'
 import Pokemon from '@/components/carrying/Pokemon.vue'
 
 export default {
+  name: 'Carrying',
   components: {
     Pokemon,
   },

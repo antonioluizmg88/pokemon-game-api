@@ -27,7 +27,7 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
 export default {
-  name: 'Home',
+  name: 'Players',
   setup() {
     const router = useRouter()
     const store = useStore()
@@ -35,7 +35,8 @@ export default {
       return store.state.players
     })
 
-    const countPokemons = ({ carrying, deposit }) => carrying.length + deposit.length
+    const countPokemons = ({ carrying, deposit }) =>
+      carrying.length + deposit.length
 
     onMounted(() => {
       store.dispatch('fetchPlayers')
