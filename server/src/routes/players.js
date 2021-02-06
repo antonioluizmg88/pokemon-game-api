@@ -127,7 +127,7 @@ router.post('/player/:id/pokemons/:identifier', async (req, res) => {
   // Add pokemon to player
   const pokemon = await response.json()
   const { id: index, name } = pokemon
-  player.pokemons.deposit.push({
+  player.pokemons.carrying.push({
     index,
     name,
     metadata: pokemon,

@@ -23,7 +23,6 @@
           placeholder="Enter your age"
           min="1"
         />
-        {{ players }}
       </div>
       <template #actions>
         <Button @click="createPlayer">Next</Button>
