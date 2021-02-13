@@ -1,5 +1,5 @@
 <template>
-  <div class="card pt-8 pb shadow-lg">
+  <div class="card pt-8">
     <h2
       v-if="slots.title"
       class="card__title inline-block min-w-min px-8 py-4 rounded-tl text-xl bg-gray-800"
@@ -9,7 +9,7 @@
       </span>
     </h2>
     <div
-      class="card__content relative flex flex-col bg-gray-800 rounded rounded-tl-none"
+      class="card__content relative flex flex-col bg-gray-800 rounded rounded-tl-none shadow-lg"
       :class="{ colapsed }"
     >
       <div class="card__text flex justify-center w-full z-0">
@@ -87,14 +87,14 @@ export default {
       &:before {
         content: '';
         position: absolute;
-        top: 26px;
-        left: -60px;
+        top: 25px;
+        left: -61px;
         width: 0;
         height: 0;
-        border-top: 45px solid;
+        border-top: 46px solid;
         @apply border-gray-900;
-        border-right: 45px solid transparent;
-        border-left: 45px solid transparent;
+        border-right: 46px solid transparent;
+        border-left: 46px solid transparent;
         // border-top: 45px solid greenyellow;
         transform: rotate(315deg);
       }

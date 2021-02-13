@@ -1,5 +1,8 @@
 <template>
-  <div v-if="player" class="player-view">
+  <div
+    v-if="player"
+    class="player-view container mx-auto max-w-5xl mx-auto p-4"
+  >
     <div class="player flex flex-col relative">
       <h1
         class="title bg-gray-800 py-4 px-8 text-6xl rounded rounded-bl-none shadow"
@@ -27,7 +30,7 @@
       </template>
     </Card>
 
-    <Card :colapsed="true">
+    <Card v-if="player.pokemons.deposit.length > 0" :colapsed="true">
       <template #title>Deposit ({{ player.pokemons.deposit.length }})</template>
       <PokemonList :list="player.pokemons.deposit" :player-id="player._id" />
       <template v-slot:actions>

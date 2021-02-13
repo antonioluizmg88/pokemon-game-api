@@ -110,6 +110,25 @@ class PlayerService {
     await this.model.update(player)
     return player
   }
+
+  /**
+   *
+   * @param player
+   * @param pokemonId
+   */
+  async releasePokemon(player, pokemonId) {
+    const { carrying, deposit } = player.pokemons
+    const pokemon = [...carrying, ...deposit].find(o => o.id === pokemonId)
+
+    if (!pokemon) {
+      throw new PokemonNotFound()
+    }
+
+    await pokemon.remove()
+    await player.save()
+
+    return true
+  }
 }
 
 module.exports = PlayerService

@@ -1,0 +1,25 @@
+{
+  "name": "pokemon-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "server": "cd server && npm run dev",
+    "ui": "cd ui && npm run serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antonioluizmg88/pokemon-game-api.git"
+  },
+  "keywords": [
+    "pokemon"
+  ],
+  "author": "@antonioluizmg88 & @rodrigoterminus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/antonioluizmg88/pokemon-game-api/issues"
+  },
+  "homepage": "https://github.com/antonioluizmg88/pokemon-game-api#readme"
+}

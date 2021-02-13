@@ -2,8 +2,7 @@ const fetch = require('node-fetch')
 const { Router } = require('express')
 const { Player } = require('../models')
 const { pokeapi } = require('../config')
-const { route } = require('./pokemons')
-const { count } = require('../models/player.model')
+const { playerService } = require('../services/player')
 
 const router = Router()
 
@@ -88,7 +87,7 @@ router.delete('/player/:id', async (req, res) => {
   }
 })
 
-router.post('/player/:id/pokemons/:identifier', async (req, res) => {
+router.post('/player/:id/catch/:identifier', async (req, res) => {
   const { id, identifier } = req.params
   let response
 
@@ -135,6 +134,28 @@ router.post('/player/:id/pokemons/:identifier', async (req, res) => {
   await player.save()
 
   res.json(player)
+})
+
+router.delete('/player/:playerId/pokemon/:pokemonId', async (req, res) => {
+  const  { playerId, pokemonId } = req.params
+  const player = await playerService.findById(playerId)
+
+  if (!player) {
+    res.status(404)
+    res.end('Player not found')
+    return
+  }
+
+  try {
+    await playerService.releasePokemon(player, pokemonId)
+  } catch (e) {
+    res.status(500)
+    res.end('Unable to release pokemon')
+    return
+  }
+
+  res.status(204)
+  res.end()
 })
 
 router.put('/player/:id/pokemons/:pokemonId/withdraw', async (req, res) => {

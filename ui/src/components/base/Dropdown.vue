@@ -1,6 +1,6 @@
 <template>
   <select
-    class="rounded bg-gray-700 rounded-md border-2 border-solid border-gray-500 m-2 p-4"
+    class="rounded bg-gray-700 rounded-md border-2 border-solid border-gray-500 p-4"
     @change="emit('update:modelValue', $event.target.value)"
   >
     <option value="" disabled="disabled" selected="selected">{{

@@ -1,5 +1,5 @@
 <template>
-  <div class="create-player">
+  <div class="create-player container mx-auto max-w-5xl md:max-w-xl p-4">
     <Card>
       <template #title>Create your player</template>
       <div class="flex flex-col w-full p-4">
@@ -9,12 +9,14 @@
           type="text"
           placeholder="Enter your name"
           @update="test = $event.target.value"
+          class="m-2"
         />
         <Dropdown
           v-model="newPlayer.gender"
           :items="genders"
           name="gender"
           placeholder="Enter your gender"
+          class="m-2"
         />
         <Input
           v-model="newPlayer.age"
@@ -22,6 +24,7 @@
           type="number"
           placeholder="Enter your age"
           min="1"
+          class="m-2"
         />
       </div>
       <template #actions>
@@ -54,12 +57,12 @@ export default {
     })
     const createPlayer = async () => {
       const { name, age, gender } = newPlayer.value
-      if (!name || !name || !gender) {
+      if (!name || !age || !gender) {
         return false
       }
 
       await store.dispatch('createPlayer', newPlayer.value)
-      router.push({
+      await router.push({
         name: 'player',
         params: { playerId: store.state.player?._id },
       })

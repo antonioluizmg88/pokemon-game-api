@@ -3,16 +3,16 @@ import store from '@/store'
 
 const routes = [
   {
-    path: '/',
+    path: '/create-player',
     name: 'create-player',
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/CreatePlayer.vue'),
   },
   {
-    path: '/pokemons-selection',
-    name: 'pokemons-selection',
+    path: '/pokemon-selection',
+    name: 'pokemon-selection',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/PokemonsSelection.vue'),
+      import(/* webpackChunkName: "about" */ '../views/PokemonSelection.vue'),
   },
   {
     path: '/players',
@@ -45,35 +45,48 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach(async (to, from) => {
+router.beforeEach(async to => {
   // const store = useStore()
   const playerId = localStorage.getItem('playerId')
+  let player = store.state.player
 
-  // Redirect to player creation if not playerId is found
+  // Redirect to player creation if no playerId is found
   if (!playerId && to.name !== 'create-player') {
-    console.info(`Player unknown. Redirecting to create a new player...`)
-    router.push({ name: 'create-player' })
-    return false
-  }
-
-  if (to.name === 'create-player') {
-    return true
+    console.info(`Unknown player. Redirecting to create a new player...`)
+    await router.push({ name: 'create-player' })
   }
 
   // Fetch player
-  if (!store.state.player) {
+  if (!player && playerId) {
     console.info(`Player does not exist in the store. Fetching from API...`)
-    await store.dispatch('fetchPlayer', playerId)
+    await store.dispatch('fetchPlayer', { playerId })
+    player = store.state.player
   }
 
   // Redirect to Pokemon selection if carrying is empty
-  const player = store.state.player
-
-  if (player.pokemons.carrying.length < 6 && to.name !== 'pokemons-selection') {
+  if (
+    player &&
+    player.pokemons.carrying.length < 6 &&
+    to.name !== 'pokemon-selection'
+  ) {
     console.info(
-      `Player has less than 6 pokemons. Redirecting to pokemons selection...`
+      `Player has less than 6 pokemons. Redirecting to Pokemon selection...`
     )
-    router.push({ name: 'pokemons-selection' })
+    await router.push({ name: 'pokemon-selection' })
+  }
+
+  if (
+    player &&
+    player.pokemons.carrying.length >= 6 &&
+    to.name === 'pokemon-selection'
+  ) {
+    console.info(`Player already has 6 pokemons. Redirecting...`)
+    await router.push({ name: 'player', params: { playerId } })
+  }
+
+  // Player already exists
+  if (player && to.name === 'create-player') {
+    await router.push({ name: 'player', params: { playerId } })
   }
 })
 
