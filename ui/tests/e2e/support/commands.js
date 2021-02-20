@@ -23,3 +23,11 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('createPlayer', () => {
+  cy.visit('/create-player')
+  cy.get('[name="name"]').type('Test user')
+  cy.get('[name="gender"]').select('X')
+  cy.get('[name="age"]').type('22')
+  cy.get('.button').click()
+})

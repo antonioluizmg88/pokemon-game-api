@@ -28,7 +28,7 @@
         />
       </div>
       <template #actions>
-        <Button @click="createPlayer">Next</Button>
+        <Button @click="createPlayer" name="next">Next</Button>
       </template>
     </Card>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <img :src="sprite" />
+  <img class="pokemon-sprite" :src="sprite" />
 </template>
 
 <script>

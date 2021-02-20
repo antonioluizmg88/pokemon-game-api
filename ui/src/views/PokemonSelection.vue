@@ -34,7 +34,9 @@
         </div>
       </div>
       <template #actions>
-        <Button :disabled="!ready" @click="confirm">Continue</Button>
+        <Button :disabled="!ready" @click="confirm" name="btn-next"
+          >Continue</Button
+        >
       </template>
     </Card>
 
