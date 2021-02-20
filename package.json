@@ -7,7 +7,8 @@
   "devDependencies": {},
   "scripts": {
     "server": "cd server && npm run dev",
-    "ui": "cd ui && npm run serve"
+    "ui": "cd ui && npm run serve",
+    "test:e2e": "cd ui && npm run test:e2e"
   },
   "repository": {
     "type": "git",

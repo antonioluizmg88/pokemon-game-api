@@ -6,8 +6,18 @@ describe('Welcome screen', () => {
 
   it('Create a new player', () => {
     cy.visit('/create-player')
+
+    cy.get('.button').click()
+    cy.url().should('match', /create-player/)
+
     cy.get('[name="name"]').type('Test user')
+    cy.get('.button').click()
+    cy.url().should('match', /create-player/)
+
     cy.get('[name="gender"]').select('X')
+    cy.get('.button').click()
+    cy.url().should('match', /create-player/)
+
     cy.get('[name="age"]').type('22')
     cy.get('.button').click()
     cy.url().should('match', /pokemon-selection/)
